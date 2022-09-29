@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="64dp"
+    tools:context=".ui.login.CreateProfileFragment">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView49"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:fontFamily="@font/poppinssemibold"
+            android:text="Create Profile"
+            android:textColor="@color/Text"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/textView50"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="48dp"
+            android:fontFamily="@font/poppinsregular"
+            android:text="Use your orginal credentials"
+            android:textColor="@color/hint"
+            android:textSize="16sp" />
+
+
+        <Spinner
+            android:id="@+id/EditBloodGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spinner_indian_states"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/Text" />
+
+
+        <EditText
+            android:id="@+id/EditDOB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/primary_outline_textbox"
+            android:drawableLeft="@drawable/ic_baseline_date_range_24"
+            android:drawablePadding="8dp"
+            android:focusableInTouchMode="false"
+            android:fontFamily="@font/poppinsregular"
+            android:hint="Date of Birth"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            android:textColor="@color/Text"
+            android:textColorHint="@color/hint"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_gender_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/EditGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/primary_outline_textbox"
+                android:drawableLeft="@drawable/ic_baseline_supervised_user_circle_24"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/poppinsregular"
+                android:hint="Gender"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textColor="@color/Text"
+                android:textColorHint="@color/hint"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/EditWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/primary_outline_textbox"
+                android:drawableLeft="@drawable/ic_baseline_line_weight_24"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/poppinsregular"
+                android:hint="Weight"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:inputType="number"
+                android:textColor="@color/Text"
+                android:textColorHint="@color/hint"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/spinner_indian_states"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_layout_gender_weight"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/Text"
+            android:drawableLeft="@drawable/ic_baseline_place_24" />
+
+        <Spinner
+            android:id="@+id/spinner_indian_district"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spinner_indian_states"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/Text"
+            android:drawableLeft="@drawable/ic_baseline_place_24" />
+
+        <EditText
+            android:id="@+id/EditContactRecord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/primary_outline_textbox"
+            android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/poppinsregular"
+            android:hint="Contact No."
+            android:inputType="number"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            android:textColor="@color/Text"
+            android:textColorHint="@color/hint"
+            android:textSize="16sp" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCreate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="32dp"
+            android:alpha="1"
+            android:background="@color/red_500"
+            android:fontFamily="@font/poppinsmedium"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:text="Next"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+</RelativeLayout>
