@@ -39,10 +39,10 @@ public class CreateProfileFragment extends Fragment {
 
     private View view;
     private String selectedState,selectedDistrict,selectedBloodGroup;
-    private Spinner stateSpinner,districtSpinner,bloodGroupSpinner;
-    private ArrayAdapter<CharSequence> stateAdapter,districtAdapter,bloodGroupAdapter;
-    private EditText weight,gender,dob,phone;
-    private String weightString,genderString,dobString, phoneString;
+    private Spinner stateSpinner,districtSpinner,bloodGroupSpinner, genderSpinner;
+    private ArrayAdapter<CharSequence> stateAdapter,districtAdapter,bloodGroupAdapter,genderAdapter;
+    private EditText weight,dob,phone;
+    private String weightString, dobString, phoneString, genderString;
     private Button nextButton;
     DatePickerDialog.OnDateSetListener setListener;
     private String TAG="CreateProfile";
@@ -71,7 +71,11 @@ public class CreateProfileFragment extends Fragment {
          bloodGroupAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
          bloodGroupSpinner.setAdapter(bloodGroupAdapter);
 
-         gender=view.findViewById(R.id.EditGender);
+         genderSpinner=view.findViewById(R.id.EditGender);
+         genderAdapter=ArrayAdapter.createFromResource(getContext(),R.array.array_gender,R.layout.spinner_layout);
+         genderAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+         genderSpinner.setAdapter(genderAdapter);
+
          weight=view.findViewById(R.id.EditWeight);
          nextButton = view.findViewById(R.id.btnCreate);
          phone=view.findViewById(R.id.EditContactRecord);
@@ -241,7 +245,17 @@ public class CreateProfileFragment extends Fragment {
              }
          });
 
+        genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                genderString=genderSpinner.getSelectedItem().toString();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         dob=view.findViewById(R.id.EditDOB);
@@ -267,7 +281,6 @@ public class CreateProfileFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                genderString=gender.getText().toString();
                 weightString=weight.getText().toString();
                 phoneString=phone.getText().toString();
                 if(check()){

@@ -57,6 +57,14 @@
         <item>O-</item>
     </string-array>
 
+    <string-array name="array_gender">
+        <item>Select Your Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+        <item>Prefer not to say</item>
+    </string-array>
+
     <string-array name="array_default_districts">
         <item>Select Your District</item>
     </string-array>
