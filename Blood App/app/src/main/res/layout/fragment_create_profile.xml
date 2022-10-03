@@ -83,9 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="32dp"
-                android:paddingTop="12dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="12dp"
+                android:layout_marginEnd="32dp"
                 android:backgroundTint="@color/Text"
                 android:drawableLeft="@drawable/ic_baseline_supervised_user_circle_24"/>
 
