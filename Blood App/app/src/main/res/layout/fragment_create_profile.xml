@@ -75,31 +75,24 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/EditGender"
-                android:layout_width="match_parent"
+
+            <Spinner
+                android:id="@+id/genders_spinner"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/primary_outline_textbox"
-                android:drawableLeft="@drawable/ic_baseline_supervised_user_circle_24"
-                android:drawablePadding="8dp"
-                android:fontFamily="@font/poppinsregular"
-                android:hint="Gender"
-                android:paddingStart="16dp"
-                android:paddingTop="12dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="12dp"
-                android:textColor="@color/Text"
-                android:textColorHint="@color/hint"
-                android:textSize="16sp" />
+                android:backgroundTint="@color/Text"
+                android:drawableLeft="@drawable/ic_baseline_supervised_user_circle_24"/>
 
             <EditText
                 android:id="@+id/EditWeight"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/primary_outline_textbox"
