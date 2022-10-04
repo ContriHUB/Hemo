@@ -148,6 +148,19 @@
         <entry key="..\:/droidrush/Hemo/Blood App/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/droidrush/Hemo/Blood App/app/src/main/res/layout/fragment_request.xml" value="0.264" />
         <entry key="..\:/droidrush/Hemo/Blood App/app/src/main/res/layout/fragment_signup.xml" value="0.2234375" />
+        <entry key="app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/ic_baseline_place_24.xml" value="0.1515" />
+        <entry key="app/src/main/res/layout/activity_admin_request.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/dialog_error_404.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/dialog_no_internet.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/fragment_create_profile.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/fragment_email_verification.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/fragment_login_home.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/fragment_schedule.xml" value="0.24635416666666668" />
+        <entry key="app/src/main/res/layout/spinner_layout.xml" value="0.24635416666666668" />
       </map>
     </option>
   </component>

@@ -41,11 +41,17 @@ public class CreateProfileFragment extends Fragment {
     private String selectedState,selectedDistrict,selectedBloodGroup;
     private Spinner stateSpinner,districtSpinner,bloodGroupSpinner;
     private ArrayAdapter<CharSequence> stateAdapter,districtAdapter,bloodGroupAdapter;
-    private EditText weight,gender,dob,phone;
+    private EditText weight,dob,phone;
     private String weightString,genderString,dobString, phoneString;
     private Button nextButton;
     DatePickerDialog.OnDateSetListener setListener;
     private String TAG="CreateProfile";
+
+    // added new variables for gender spinner
+    private Spinner genderSpinner;
+    private ArrayAdapter<CharSequence> genderAdapter;
+    private String selectedGender;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,12 +72,33 @@ public class CreateProfileFragment extends Fragment {
 
          stateSpinner.setAdapter(stateAdapter);
 
+         /* STARTING CODE FOR GENDER SPINNER */
+        //linking spinner with its xml
+        genderSpinner = view.findViewById(R.id.EditGenderSpinner);
+        //creating adapter for the gender spinner
+        genderAdapter = ArrayAdapter.createFromResource(getContext(),R.array.array_gender,R.layout.spinner_layout);
+        genderAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        //setting adapter to the spinner
+        genderSpinner.setAdapter(genderAdapter);
+        // adding item listener to the spinner
+        genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedGender = (String) parent.getItemAtPosition(position);
+                Log.e(TAG,selectedGender);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
          bloodGroupSpinner=view.findViewById(R.id.EditBloodGroup);
          bloodGroupAdapter=ArrayAdapter.createFromResource(getContext(),R.array.array_blood_group,R.layout.spinner_layout);
          bloodGroupAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
          bloodGroupSpinner.setAdapter(bloodGroupAdapter);
 
-         gender=view.findViewById(R.id.EditGender);
          weight=view.findViewById(R.id.EditWeight);
          nextButton = view.findViewById(R.id.btnCreate);
          phone=view.findViewById(R.id.EditContactRecord);
@@ -267,7 +294,8 @@ public class CreateProfileFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                genderString=gender.getText().toString();
+                genderString=selectedGender;
+                Log.e(TAG,genderString);
                 weightString=weight.getText().toString();
                 phoneString=phone.getText().toString();
                 if(check()){
@@ -281,6 +309,7 @@ public class CreateProfileFragment extends Fragment {
 
         return view;
     }
+
 
     private void createUser() {
         User user = new User(((LoginActivity)getActivity()).getUserEmail(),Integer.parseInt(weightString),genderString,dobString,selectedBloodGroup,selectedDistrict,phoneString);
