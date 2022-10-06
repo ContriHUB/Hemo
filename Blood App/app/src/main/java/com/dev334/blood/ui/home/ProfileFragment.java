@@ -15,7 +15,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -31,6 +30,7 @@ import com.dev334.blood.util.app.AppConfig;
 import com.dev334.blood.util.retrofit.ApiClient;
 import com.dev334.blood.util.retrofit.ApiInterface;
 import com.dev334.blood.util.retrofit.NoConnectivityException;
+import com.google.android.material.snackbar.Snackbar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -200,7 +200,7 @@ public class ProfileFragment extends Fragment {
                 loading.dismiss();
                 if(!response.isSuccessful()){
                     if(response.code()==404){
-                        Toast.makeText(getContext(), "No schedule", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(binding.getRoot(), "No schedule", Snackbar.LENGTH_SHORT).show();
                     }else{
                         Log.i(TAG, "onResponse:Error "+response.message());
                     }
@@ -289,7 +289,7 @@ public class ProfileFragment extends Fragment {
                 loading.dismiss();
                 if(!response.isSuccessful()){
                     if(response.code()==404){
-                        Toast.makeText(getContext(), "No donation Appointment", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(binding.getRoot(), "No donation Appointment", Snackbar.LENGTH_SHORT).show();
                     }else{
                         Log.i(TAG, "onResponse:Error "+response.message());
                     }
@@ -329,13 +329,13 @@ public class ProfileFragment extends Fragment {
                 if(!response.isSuccessful()){
                     Log.i(TAG, "onResponse: "+response.code());
                     Log.i(TAG, "onResponse: "+response.toString());
-                    Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), "An error occurred", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 Log.i(TAG, "onResponse: "+response.body());
                 if(response.body().getStatus()==200){
                     Log.i(TAG, "onResponse: Successful");
-                    Toast.makeText(getContext(), "Removed", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), "Removed", Snackbar.LENGTH_SHORT).show();
                 }
             }
 
@@ -362,14 +362,13 @@ public class ProfileFragment extends Fragment {
                 if(!response.isSuccessful()){
                     Log.i(TAG, "onResponse: "+response.code());
                     Log.i(TAG, "onResponse: "+response.toString());
-                    Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), "An error occurred", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 Log.i(TAG, "onResponse: "+response.body());
                 if(response.body().getStatus()==200) {
                     Log.i(TAG, "onResponse: Successful");
-                    Toast.makeText(getContext(), "Removed", Toast.LENGTH_SHORT).show();
-
+                    Snackbar.make(binding.getRoot(), "Removed", Snackbar.LENGTH_SHORT).show();
                 }
             }
 
@@ -398,13 +397,13 @@ public class ProfileFragment extends Fragment {
                 if(!response.isSuccessful()){
                     Log.i(TAG, "onResponse: "+response.code());
                     Log.i(TAG, "onResponse: "+response.message());
-                    Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), "An error occurred", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 Log.i(TAG, "onResponse: "+response.body());
                 if(response.body().getStatus()==200){
                     Log.i(TAG, "onResponse: Successful");
-                    Toast.makeText(getContext(), "Account Deleted", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), "Account Deleted", Snackbar.LENGTH_SHORT).show();
                     appConfig.setAuthToken("");
                     appConfig.setLoginStatus(false);
                     appConfig.setProfileCreated(false);

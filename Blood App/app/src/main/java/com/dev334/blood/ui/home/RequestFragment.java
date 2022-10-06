@@ -21,7 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +39,7 @@ import com.dev334.blood.util.retrofit.ApiInterface;
 import com.dev334.blood.util.retrofit.NoConnectivityException;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -174,7 +174,7 @@ public class RequestFragment extends Fragment {
             if(quantity.isEmpty()){
                 binding.EditQuantity.setError("Enter quantity");
             }else if(blood.isEmpty()){
-                Toast.makeText(getContext(), "Select a blood type", Toast.LENGTH_SHORT).show();
+                Snackbar.make(binding.getRoot(), "Select a blood type", Snackbar.LENGTH_SHORT).show();
             }
             else if(pdfUploadFlag==false)
             {
@@ -259,11 +259,11 @@ public class RequestFragment extends Fragment {
                     Log.i(TAG, "onResponse: "+response.toString());
 
                   if(response.code()==450){
-                      Toast.makeText(getContext(), "You already have an existing request", Toast.LENGTH_SHORT).show();
+                      Snackbar.make(binding.getRoot(), "You already have an existing request", Snackbar.LENGTH_SHORT).show();
                       return;
                   }
 
-                    Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), "An error occurred", Snackbar.LENGTH_SHORT).show();
                     showErrorDialog();
                     return;
                 }

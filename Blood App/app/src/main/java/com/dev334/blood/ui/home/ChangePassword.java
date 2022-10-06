@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.dev334.blood.databinding.ActivityChangePasswordBinding;
 import com.dev334.blood.model.ApiResponse;
@@ -17,6 +16,7 @@ import com.dev334.blood.ui.login.LoginActivity;
 import com.dev334.blood.util.app.AppConfig;
 import com.dev334.blood.util.retrofit.ApiClient;
 import com.dev334.blood.util.retrofit.ApiInterface;
+import com.google.android.material.snackbar.Snackbar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,14 +66,13 @@ public class ChangePassword extends AppCompatActivity {
                 if(!response.isSuccessful()){
                     Log.i(TAG, "onResponse: "+response.code());
                     Log.i(TAG, "onResponse: "+response.message());
-                    Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), response.message(), Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 Log.i(TAG, "onResponse: "+response.body());
                 if(response.body().getStatus()==200){
                     Log.i(TAG, "onResponse: Successful");
-                    Toast.makeText(getApplicationContext(), "Password Changed", Toast.LENGTH_SHORT).show();
-
+                    Snackbar.make(binding.getRoot(), "Password Changed", Snackbar.LENGTH_SHORT).show();
                     finish();
                 }
             }

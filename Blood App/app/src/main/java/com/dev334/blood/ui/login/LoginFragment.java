@@ -13,7 +13,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -120,11 +119,11 @@ public class LoginFragment extends Fragment {
                 if(!response.isSuccessful()){
 
                     if(response.code()==401){
-                        Toast.makeText(getContext(), "Email not verified", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(view, "Email not verified", Snackbar.LENGTH_SHORT).setAnchorView(Login).show();
                         loading.setVisibility(View.INVISIBLE);
                         return;
                     }
-                    Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "An error occurred", Snackbar.LENGTH_SHORT).setAnchorView(Login).show();
                     Log.i(TAG, "onResponse: "+response.code());
                     loading.setVisibility(View.INVISIBLE);
                     return;

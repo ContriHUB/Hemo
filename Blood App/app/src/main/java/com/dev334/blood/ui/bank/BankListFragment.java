@@ -16,13 +16,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dev334.blood.R;
 import com.dev334.blood.databinding.FragmentBankListBinding;
 import com.dev334.blood.databinding.FragmentBankMapBinding;
 import com.dev334.blood.model.BloodBank;
 import com.dev334.blood.ui.home.HomeActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,7 +102,7 @@ public class BankListFragment extends Fragment implements BankAdapter.ClickInter
 
         contact.setOnClickListener(v->{
             if(phone.isEmpty()){
-                Toast.makeText(getActivity(), "Phone number not provided", Toast.LENGTH_SHORT).show();
+                Snackbar.make(binding.getRoot(), "Phone number not provided", Snackbar.LENGTH_SHORT).show();
             }else{
                 Intent intent =new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:"+phone.get(0)));
