@@ -68,8 +68,8 @@ public class ScheduleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentScheduleBinding.inflate(getLayoutInflater());
-        DateTime start=DateTime.now();
-        DateTime end = DateTime.now().plusDays(10);
+        DateTime start=DateTime.now().withDayOfMonth(1);
+        DateTime end = DateTime.now().withDayOfMonth(1).plusMonths(1).minusDays(1);
         binding.datePicker.setStartDate(start.getDayOfMonth(), start.getMonthOfYear(), start.getYear());
         binding.datePicker.setEndDate(end.getDayOfMonth(), end.getMonthOfYear(), end.getYear());
         LoadingShow();
