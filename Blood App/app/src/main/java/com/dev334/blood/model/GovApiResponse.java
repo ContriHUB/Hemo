@@ -12,6 +12,9 @@ public class GovApiResponse {
     @SerializedName("total")
     private Integer total;
 
+    @SerializedName("status")
+    private String status;
+
     public GovApiResponse() {
     }
 
@@ -30,4 +33,6 @@ public class GovApiResponse {
     public void setTotal(Integer total) {
         this.total = total;
     }
+
+    public String getStatus(){ return status; }
 }
