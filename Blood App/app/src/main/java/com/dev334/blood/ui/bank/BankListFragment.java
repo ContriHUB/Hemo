@@ -26,6 +26,8 @@ import com.dev334.blood.ui.home.HomeActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class BankListFragment extends Fragment implements BankAdapter.ClickInterface {
@@ -58,6 +60,7 @@ public class BankListFragment extends Fragment implements BankAdapter.ClickInter
 
         bloodBankList=new ArrayList<>();
         bloodBankList=((BloodBankActivity)getActivity()).getBloodBankList();
+        sort(bloodBankList);
 
         bankAdapter=new BankAdapter(bloodBankList, this);
         binding.bankRecyclerView.setAdapter(bankAdapter);
@@ -112,6 +115,23 @@ public class BankListFragment extends Fragment implements BankAdapter.ClickInter
 
         alert.setCancelable(true);
         show.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    private void sort(List<BloodBank> bloodBankList){
+        double lat = ((BloodBankActivity)getActivity()).getLatitude();
+        double lont = ((BloodBankActivity)getActivity()).getLongitude();
+        Collections.sort(bloodBankList, new Comparator<BloodBank>() {
+            @Override
+            public int compare(BloodBank ob1, BloodBank ob2) {
+                double x1 = Math.pow(ob1.getLatitude() - lat, 2);
+                double y1 = Math.pow(ob1.getLongitude() - lont, 2);
+                double r1 = Math.sqrt(x1+y1);
+                double x2 = Math.pow(ob2.getLatitude() - lat, 2);
+                double y2 = Math.pow(ob2.getLongitude() - lont, 2);
+                double r2 = Math.sqrt(x2+y2);
+                return (int)(r1-r2);
+            }
+        });
     }
 
     @Override
