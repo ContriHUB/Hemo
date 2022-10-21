@@ -20,7 +20,9 @@ import android.widget.Toast;
 
 import com.dev334.blood.R;
 import com.dev334.blood.databinding.FragmentBankListBinding;
+import com.dev334.blood.databinding.FragmentBankMapBinding;
 import com.dev334.blood.model.BloodBank;
+import com.dev334.blood.ui.home.HomeActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
