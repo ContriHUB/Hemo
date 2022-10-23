@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -27,6 +26,7 @@ import com.dev334.blood.model.User;
 import com.dev334.blood.util.retrofit.ApiClient;
 import com.dev334.blood.util.retrofit.ApiInterface;
 import com.dev334.blood.util.retrofit.NoConnectivityException;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -304,7 +304,7 @@ public class CreateProfileFragment extends Fragment {
                 if(!response.isSuccessful()){
                     Log.i(TAG, "onResponse: "+response.code());
                     Log.i(TAG, "onResponse: "+response.toString());
-                    Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "An error occurred", Snackbar.LENGTH_SHORT).setAnchorView(nextButton).show();
                     return;
                 }
                 Log.i(TAG, "onResponse: "+response.body());
@@ -377,11 +377,11 @@ public class CreateProfileFragment extends Fragment {
             return false;
         }
         if(selectedDistrict.equals("Select Your District")){
-            Toast.makeText(getContext(),"Enter your location",Toast.LENGTH_LONG).show();
+            Snackbar.make(view, "Enter your location", Snackbar.LENGTH_LONG).setAnchorView(nextButton).show();
             return false;
         }
         if(selectedBloodGroup.equals("Select Your Blood Group")){
-            Toast.makeText(getContext(),"Select your blood group",Toast.LENGTH_LONG).show();
+            Snackbar.make(view, "Select your blood group", Snackbar.LENGTH_LONG).setAnchorView(nextButton).show();
             return false;
         }
 

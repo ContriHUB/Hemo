@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,6 +28,7 @@ import com.dev334.blood.util.app.AppConfig;
 import com.dev334.blood.util.retrofit.ApiClient;
 import com.dev334.blood.util.retrofit.ApiInterface;
 import com.dev334.blood.util.retrofit.NoConnectivityException;
+import com.google.android.material.snackbar.Snackbar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -233,7 +233,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 if(!response.isSuccessful()){
                     Log.i(TAG, "onResponse: "+response.code());
                     Log.i(TAG, "onResponse: "+response.toString());
-                    Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), "An error occurred", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 Log.i(TAG, "onResponse: "+response.body());
@@ -246,7 +246,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
                     appConfig.setUserInfo(user);
 
-                    Toast.makeText(getApplicationContext(), "Profile Updated", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), "Profile Updated", Snackbar.LENGTH_SHORT).show();
                     finish();
                 }
 
@@ -293,7 +293,7 @@ public class EditProfileActivity extends AppCompatActivity {
             return false;
         }
         if(selectedDistrict.equals("Select Your District")){
-            Toast.makeText(getApplicationContext(),"Enter your location",Toast.LENGTH_LONG).show();
+            Snackbar.make(binding.getRoot(), "Enter your location", Snackbar.LENGTH_LONG).show();
             return false;
         }
         return true;

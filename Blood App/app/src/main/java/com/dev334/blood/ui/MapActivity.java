@@ -33,6 +33,7 @@ import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.core.Location;
 import com.here.sdk.core.Point2D;
@@ -213,7 +214,7 @@ public class MapActivity extends AppCompatActivity {
 
                 try {
                     LocationSettingsResponse response = task.getResult(ApiException.class);
-                    Toast.makeText(MapActivity.this, "GPS is already tured on", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), "GPS is already tured on", Snackbar.LENGTH_SHORT).show();
 
                 } catch (ApiException e) {
 
