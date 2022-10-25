@@ -131,6 +131,8 @@ public class BankListFragment extends Fragment implements BankAdapter.ClickInter
         Collections.sort(bloodBankList, new Comparator<BloodBank>() {
             @Override
             public int compare(BloodBank ob1, BloodBank ob2) {
+                if(Math.abs(ob1.getDistance()-ob2.getDistance())<0.0000000001)
+                    return 0;
                 return (int)(ob1.getDistance() - ob2.getDistance());
             }
         });

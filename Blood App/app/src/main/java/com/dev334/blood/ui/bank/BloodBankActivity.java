@@ -74,21 +74,11 @@ public class BloodBankActivity extends AppCompatActivity {
         fragmentManager=getSupportFragmentManager();
         tinyDB=new TinyDB(this);
 
-        checkPermissions() ;
         getLocation();
         if(savedInstanceState==null){
             getBloodBanks();
         }else{
             replaceFragment(bankListFragment);
-        }
-    }
-
-    private void checkPermissions(){
-        if (ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_CODE);
-            return;
         }
     }
 
