@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +23,7 @@ import com.dev334.blood.databinding.FragmentNotificationBinding;
 import com.dev334.blood.model.Blood;
 import com.dev334.blood.util.app.DownloadPDF;
 import com.dev334.blood.util.app.PdfViewerActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -104,7 +104,7 @@ public class NotificationFragment extends Fragment implements BloodRequestAdapte
               public void onClick(View view) {
                   String phone=bloods.get(position).getPhone();
                   if(phone.equals("")){
-                      Toast.makeText(getActivity(), "Phone number not provided", Toast.LENGTH_SHORT).show();
+                      Snackbar.make(binding.getRoot(), "Phone number not provided", Snackbar.LENGTH_SHORT).show();
                   }else{
                       Intent intent =new Intent(Intent.ACTION_DIAL);
                       intent.setData(Uri.parse("tel:"+phone));

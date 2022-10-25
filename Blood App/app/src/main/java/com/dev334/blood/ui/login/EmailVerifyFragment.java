@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -26,6 +25,7 @@ import com.dev334.blood.util.retrofit.ApiInterface;
 import com.dev334.blood.util.retrofit.NoConnectivityException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -84,11 +84,11 @@ public class EmailVerifyFragment extends Fragment {
             public void onResponse(Call<User> call, Response<User> response) {
                 if(!response.isSuccessful()){
                     if(response.code()==401){
-                        Toast.makeText(getContext(), "Email not verified", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(parentLayout, "Email not verified", Snackbar.LENGTH_SHORT).setAnchorView(Done).show();
                         loading.setVisibility(View.INVISIBLE);
                         return;
                     }
-                    Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(parentLayout, "An error occurred", Snackbar.LENGTH_SHORT).setAnchorView(Done).show();
                     Log.i(TAG, "onResponse: "+response.code());
                     loading.setVisibility(View.INVISIBLE);
                     return;

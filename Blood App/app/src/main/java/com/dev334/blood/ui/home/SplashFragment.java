@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -19,6 +18,7 @@ import com.dev334.blood.util.app.AppConfig;
 import com.dev334.blood.util.retrofit.ApiClient;
 import com.dev334.blood.util.retrofit.ApiInterface;
 import com.dev334.blood.util.retrofit.NoConnectivityException;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -60,7 +60,7 @@ public class SplashFragment extends Fragment {
                 @Override
                 public void onResponse(Call<List<Blood>> call, Response<List<Blood>> response) {
                     if(!response.isSuccessful()){
-                        Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(view, "An error occurred", Snackbar.LENGTH_SHORT).show();
                         Log.i(TAG, "onResponse: "+response.code());
                         Log.i(TAG, "onResponse: "+response.errorBody());
                         return;
