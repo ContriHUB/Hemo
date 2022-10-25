@@ -2,31 +2,27 @@ package com.dev334.blood.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class BloodBank {
 
     @SerializedName("_blood_bank_name")
     private String bankName;
 
-    @SerializedName("__longitude")
+    @SerializedName("_longitude")
     private Double longitude;
 
-    @SerializedName("__latitude")
+    @SerializedName("_latitude")
     private Double latitude;
 
-    @SerializedName("__contact_no")
+    @SerializedName("_contact_no")
     private String contact;
 
-    @SerializedName("__address")
+    @SerializedName("_address")
     private String address;
 
     @SerializedName("sr_no")
     private String id;
 
-    public BloodBank() {
-
-    }
+    private double distance;
 
     public String getId() {
         return id;
@@ -74,5 +70,13 @@ public class BloodBank {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }

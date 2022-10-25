@@ -26,6 +26,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class BankListFragment extends Fragment implements BankAdapter.ClickInterface {
@@ -58,6 +60,7 @@ public class BankListFragment extends Fragment implements BankAdapter.ClickInter
 
         bloodBankList=new ArrayList<>();
         bloodBankList=((BloodBankActivity)getActivity()).getBloodBankList();
+        sort(bloodBankList);
 
         bankAdapter=new BankAdapter(bloodBankList, this);
         binding.bankRecyclerView.setAdapter(bankAdapter);
@@ -112,6 +115,27 @@ public class BankListFragment extends Fragment implements BankAdapter.ClickInter
 
         alert.setCancelable(true);
         show.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    private void sort(List<BloodBank> bloodBankList){
+        double lat = ((BloodBankActivity)getActivity()).getLatitude();
+        double lont = ((BloodBankActivity)getActivity()).getLongitude();
+
+        for(BloodBank b: bloodBankList){
+            double x1 = Math.pow(b.getLatitude() - lat, 2);
+            double y1 = Math.pow(b.getLongitude() - lont, 2);
+            double r1 = Math.sqrt(x1+y1);
+            b.setDistance(r1);
+        }
+
+        Collections.sort(bloodBankList, new Comparator<BloodBank>() {
+            @Override
+            public int compare(BloodBank ob1, BloodBank ob2) {
+                if(Math.abs(ob1.getDistance()-ob2.getDistance())<0.0000000001)
+                    return 0;
+                return (int)(ob1.getDistance() - ob2.getDistance());
+            }
+        });
     }
 
     @Override
