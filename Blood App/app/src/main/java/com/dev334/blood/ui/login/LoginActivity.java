@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -27,6 +27,7 @@ import com.dev334.blood.util.app.AppConfig;
 import com.dev334.blood.util.retrofit.ApiClient;
 import com.dev334.blood.util.retrofit.ApiInterface;
 import com.dev334.blood.util.retrofit.NoConnectivityException;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -50,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     private String UserId;
     private final String TAG="LoginActivityLog";
     private AppConfig appConfig;
+    private ConstraintLayout parentLayout;
 
     private String email, password,  phoneNo, verificationID;
 
@@ -70,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
         FRAGMENT=getIntent().getIntExtra("FRAGMENT",0);
 
+        parentLayout = findViewById(R.id.parentLayout);
 
         appConfig = new AppConfig(this);
 
@@ -154,10 +157,10 @@ public class LoginActivity extends AppCompatActivity {
                 if(!response.isSuccessful()){
 
                     if(response.code()==401){
-                        Toast.makeText(getApplicationContext(), "Email not verified", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(parentLayout, "Email not verified", Snackbar.LENGTH_SHORT).show();
                         return;
                     }
-                    Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(parentLayout, "An error occurred", Snackbar.LENGTH_SHORT).show();
                     Log.i(TAG, "onResponse: "+response.code());
                     Log.i(TAG, "onResponse: "+response.message());
                     return;

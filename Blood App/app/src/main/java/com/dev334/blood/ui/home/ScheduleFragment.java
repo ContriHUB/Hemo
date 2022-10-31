@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -28,6 +27,7 @@ import com.dev334.blood.ui.bank.BloodBankActivity;
 import com.dev334.blood.util.retrofit.ApiClient;
 import com.dev334.blood.util.retrofit.ApiInterface;
 import com.dev334.blood.util.retrofit.NoConnectivityException;
+import com.google.android.material.snackbar.Snackbar;
 import com.harrywhewell.scrolldatepicker.OnDateSelectedListener;
 
 import org.joda.time.DateTime;
@@ -115,9 +115,9 @@ public class ScheduleFragment extends Fragment {
 
         binding.bloodScheduleDone.setOnClickListener(v->{
             if(dateString.isEmpty()){
-                Toast.makeText(getContext(), "Select a date", Toast.LENGTH_SHORT).show();
+                Snackbar.make(binding.getRoot(), "Select a date", Snackbar.LENGTH_SHORT).show();
             }else if(time.isEmpty()){
-                Toast.makeText(getContext(), "Select a time slot", Toast.LENGTH_SHORT).show();
+                Snackbar.make(binding.getRoot(), "Select a time slot", Snackbar.LENGTH_SHORT).show();
             }else if(bloodBank==null){
                 binding.bloodBank.setError("Select a blood bank");
             }else{
@@ -152,11 +152,11 @@ public class ScheduleFragment extends Fragment {
                     Log.i(TAG, "onResponse: "+response.toString());
 
                     if(response.code()==450){
-                        Toast.makeText(getContext(), "You already have an appointment", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(binding.getRoot(), "You already have an appointment", Snackbar.LENGTH_SHORT).show();
                         return;
                     }
 
-                    Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), "An error occurred", Snackbar.LENGTH_SHORT).show();
                     showErrorDialog();
                     return;
                 }

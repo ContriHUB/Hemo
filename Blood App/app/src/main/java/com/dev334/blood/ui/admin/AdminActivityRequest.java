@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +22,7 @@ import com.dev334.blood.util.app.AppConfig;
 import com.dev334.blood.util.retrofit.ApiClient;
 import com.dev334.blood.util.retrofit.ApiInterface;
 import com.dev334.blood.util.retrofit.NoConnectivityException;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class AdminActivityRequest extends AppCompatActivity {
        private List<Blood> pendingRequests;
        private AppConfig appConfig;
        private RecyclerView recyclerViewPendingRequests;
+       private ConstraintLayout parentLayout;
 
 
     @Override
@@ -48,7 +50,7 @@ public class AdminActivityRequest extends AppCompatActivity {
         recyclerViewPendingRequests=(RecyclerView) findViewById(R.id.blood_request_pending_recycler);
         reqPendingRequests();
 
-
+        parentLayout = findViewById(R.id.parentLayout);
     }
 
     private void reqPendingRequests() {
@@ -61,7 +63,7 @@ public class AdminActivityRequest extends AppCompatActivity {
                 if(!response.isSuccessful()){
                     Log.i(TAG, "onResponse: "+response.code());
                     Log.i(TAG, "onResponse: "+response.toString());
-                    Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(parentLayout, "An error occurred", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 

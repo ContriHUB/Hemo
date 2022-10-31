@@ -1,8 +1,12 @@
 package com.dev334.blood.ui.bank;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -10,9 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -26,6 +31,11 @@ import com.dev334.blood.util.app.AppConfig;
 import com.dev334.blood.util.retrofit.ApiInterface;
 import com.dev334.blood.util.retrofit.GovApiClient;
 import com.dev334.blood.util.retrofit.NoConnectivityException;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +46,7 @@ import retrofit2.Response;
 
 public class BloodBankActivity extends AppCompatActivity {
 
+    private static final int REQUEST_LOCATION_CODE = 101;
     private final String TAG="BloodBankActivityLog";
     private List<BloodBank> bloodBankList;
     private AppConfig appConfig;
@@ -44,6 +55,8 @@ public class BloodBankActivity extends AppCompatActivity {
     private BankMapFragment bankMapFragment;
     private FragmentManager fragmentManager;
     private TinyDB tinyDB;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private double latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +66,7 @@ public class BloodBankActivity extends AppCompatActivity {
         appConfig=new AppConfig(this);
 
         bloodBankList=new ArrayList<>();
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         bankListFragment=BankListFragment.newInstance();
         bankMapFragment=BankMapFragment.newInstance();
@@ -60,24 +74,37 @@ public class BloodBankActivity extends AppCompatActivity {
         fragmentManager=getSupportFragmentManager();
         tinyDB=new TinyDB(this);
 
+        getLocation();
         if(savedInstanceState==null){
             getBloodBanks();
         }else{
             replaceFragment(bankListFragment);
         }
+    }
 
+    private void getLocation(){
+        @SuppressLint("MissingPermission") Task<Location> task =fusedLocationProviderClient.getLastLocation();
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if(location!=null) {
+                    latitude=location.getLatitude();
+                    longitude=location.getLongitude();
+                }
+            }
+        });
     }
 
     private void getBloodBanks() {
-        Call<GovApiResponse> call= GovApiClient.getApiClient(getApplicationContext()).create(ApiInterface.class).getBloodBank(appConfig.getUserLocation());
+        Call<GovApiResponse> call= GovApiClient.getApiClient(getApplicationContext()).create(ApiInterface.class).getBloodBank();
         call.enqueue(new Callback<GovApiResponse>() {
             @Override
             public void onResponse(Call<GovApiResponse> call, Response<GovApiResponse> response) {
-
+                Log.i(TAG, String.valueOf(call.request().url()));
                 if(!response.isSuccessful()){
                     Log.i(TAG, "onResponse: "+response.code());
                     Log.i(TAG, "onResponse: "+response.toString());
-                    Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), "An error occurred", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -95,7 +122,6 @@ public class BloodBankActivity extends AppCompatActivity {
                 Log.i(TAG, "onFailure: "+t.getMessage());
                 if(t instanceof NoConnectivityException){
                     showNoInternetDialog();
-
                     return;
                 }
             }
@@ -157,5 +183,13 @@ public class BloodBankActivity extends AppCompatActivity {
     public void openHomeActivity(BloodBank bloodBank) {
         tinyDB.putObject("BloodBank", bloodBank);
         finish();
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
     }
 }

@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +23,7 @@ import com.dev334.blood.model.Schedule;
 import com.dev334.blood.util.retrofit.ApiClient;
 import com.dev334.blood.util.retrofit.ApiInterface;
 import com.dev334.blood.util.retrofit.NoConnectivityException;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -36,6 +36,7 @@ public class ScheduleRequestAdapter extends RecyclerView.Adapter<ScheduleRequest
     private List<Schedule> schedules;
     private boolean PENDING;
     private Context context;
+    private View view;
     private String TAG="ScheduleRequestAdapter";
     public ScheduleRequestAdapter(List<Schedule> schedules,boolean pending,Context context){
         this.schedules=schedules;
@@ -46,7 +47,7 @@ public class ScheduleRequestAdapter extends RecyclerView.Adapter<ScheduleRequest
     @NonNull
     @Override
     public ScheduleRequestAdapter.mViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.appointment_card, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.appointment_card, parent, false);
         return new ScheduleRequestAdapter.mViewHolder(view);
     }
 
@@ -63,10 +64,10 @@ public class ScheduleRequestAdapter extends RecyclerView.Adapter<ScheduleRequest
                     schedules.remove(actualPosition);
                     notifyItemRemoved(actualPosition);
                     notifyItemRangeChanged(actualPosition,schedules.size());
-                    Toast.makeText(view.getContext(), "Marked Approved",Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Marked Approved", Snackbar.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(view.getContext(), "Success",Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Success", Snackbar.LENGTH_SHORT).show();
                     Success(schedules.get(position).get_id(),"1");
                 }
 
@@ -83,10 +84,10 @@ public class ScheduleRequestAdapter extends RecyclerView.Adapter<ScheduleRequest
                     schedules.remove(actualPosition);
                     notifyItemRemoved(actualPosition);
                     notifyItemRangeChanged(actualPosition,schedules.size());
-                    Toast.makeText(view.getContext(), "Declined",Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Declined", Snackbar.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(view.getContext(), "Success",Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Success", Snackbar.LENGTH_SHORT).show();
                     Success(schedules.get(position).get_id(),"0");
                 }
             }
@@ -132,13 +133,14 @@ public class ScheduleRequestAdapter extends RecyclerView.Adapter<ScheduleRequest
                 if(!response.isSuccessful()){
                     Log.i(TAG, "onResponse: "+response.code());
                     Log.i(TAG, "onResponse: "+response.toString());
-                    Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "An error occurred", Snackbar.LENGTH_SHORT).show();
+
                     return;
                 }
                 Log.i(TAG, "onResponse: "+response.body());
                 if(response.body().getStatus()==200){
                     Log.i(TAG, "onResponse: Successful");
-                    Toast.makeText(context, "Request Approved", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Request Approved", Snackbar.LENGTH_SHORT).show();
                 }
             }
 
@@ -181,13 +183,13 @@ public class ScheduleRequestAdapter extends RecyclerView.Adapter<ScheduleRequest
                 if(!response.isSuccessful()){
                     Log.i(TAG, "onResponse: "+response.code());
                     Log.i(TAG, "onResponse: "+response.toString());
-                    Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "An error occurred", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 Log.i(TAG, "onResponse: "+response.body());
                 if(response.body().getStatus()==200){
                     Log.i(TAG, "onResponse: Successful");
-                    Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Success", Snackbar.LENGTH_SHORT).show();
                 }
             }
 

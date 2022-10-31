@@ -18,13 +18,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dev334.blood.R;
 import com.dev334.blood.databinding.FragmentBankMapBinding;
 import com.dev334.blood.model.BloodBank;
 import com.dev334.blood.util.app.AppConfig;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.material.snackbar.Snackbar;
 import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.core.Point2D;
 import com.here.sdk.gestures.Gestures;
@@ -135,7 +135,7 @@ public class BankMapFragment extends Fragment {
         }else if(bloodBankList.size()>1){
             geo = new GeoCoordinates(bloodBankList.get(0).getLatitude(), bloodBankList.get(0).getLongitude());
         }else{
-            Toast.makeText(getContext(), "Error occurred", Toast.LENGTH_SHORT).show();
+            Snackbar.make(binding.getRoot(), "Error occurred", Snackbar.LENGTH_SHORT).show();
             return;
         }
         binding.mapView2.getCamera().lookAt(geo, distanceInMeters);
@@ -204,7 +204,7 @@ public class BankMapFragment extends Fragment {
 
         contact.setOnClickListener(v->{
             if(phone.isEmpty()){
-                Toast.makeText(getActivity(), "Phone number not provided", Toast.LENGTH_SHORT).show();
+                Snackbar.make(binding.getRoot(), "Phone number not provided", Snackbar.LENGTH_SHORT).show();
             }else{
                 Intent intent =new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:"+phone.get(0)));
